@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Editor, EditorState, RichUtils, convertToRaw } from 'draft-js';
-import '../NotesApp.css'
+import 'NotesApp.css'
 
 const NoteForm = ({ onSubmit }) => {
   const [title, setTitle] = useState('');

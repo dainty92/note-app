@@ -1,6 +1,6 @@
 // import React, { useState } from 'react';
 // import { Editor, EditorState } from 'draft-js';
-import '../NotesApp.css'
+import 'NotesApp.css'
 
 const RichTextEditor = () => {
   // const [editorState, setEditorState] = useState(() => EditorState.createEmpty());

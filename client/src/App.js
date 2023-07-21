@@ -4,7 +4,7 @@ import NoteList from './components/NotesList';
 import AuthForm from './AuthForm';
 import NotesApp from './NotesApp';
 // import RichTextEditor from './components/RichTextEditor';
-import './App.css';
+import 'App.css';
 import './AuthForm.css';
 
 const App = () => {
