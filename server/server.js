@@ -29,6 +29,7 @@ db.on('error', (error) => console.error('MongoDB connection error:', error));
 db.once('open', () => console.log('Connected to MongoDB database'));
 
 // Middleware
+app.use(express.json());
 app.use(cors({ origin: 'http://localhost:3001', credentials: true }));
 app.use(cookieParser());
 app.use(bodyParser.json());
