@@ -1,0 +1,20 @@
+{
+  "short_name": "Notes App",
+  "name": "Esther's Notes App",
+  "icons": [
+    {
+      "src": "Group 1 (4).png", 
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "Group 2 (3).png", 
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/index.html",
+  "display": "standalone",
+  "theme_color": "#2196F3",
+  "background_color": "#ffffff"
+}
