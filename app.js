@@ -7,9 +7,9 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const User = require('./models/User');
-const Note = require('./models/Note');
-const authMiddleware = require('./middleware/authMiddleware');
+const User = require('./server/models/User');
+const Note = require('./server/models/Note');
+const authMiddleware = require('./server/middleware/authMiddleware');
 require('dotenv').config();
 const crypto = require('crypto');
 
