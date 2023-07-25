@@ -1,6 +1,6 @@
 import React from 'react';
 import { Editor, EditorState, convertFromRaw } from 'draft-js';
-import 'App.css';
+import '../App.css';
 
 const NoteCard = ({ title, content }) => {
   const contentState = convertFromRaw(JSON.parse(content));

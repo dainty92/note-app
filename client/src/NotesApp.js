@@ -1,6 +1,6 @@
 import React, { useState, lazy, Suspense } from 'react';
 import 'draft-js/dist/Draft.css';
-import 'NotesApp.css';
+import './NotesApp.css';
 
 const NoteForm = lazy(() => import('./components/NoteForm'));
 const NotesList = lazy(() => import('./components/NotesList'));
