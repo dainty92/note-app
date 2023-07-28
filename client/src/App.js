@@ -9,9 +9,45 @@ import './AuthForm.css';
 
 const App = () => {
   const [authenticated, setAuthenticated] = useState(false);
+  const [token, setToken] = useState('');
+  const [notes, setNotes] = useState([]);
 
-  const handleLoginSuccess = () => {
+  const handleLoginSuccess = (token) => {
     setAuthenticated(true);
+    setToken(token);
+    console.log('Token:', token);
+  };
+
+  const handleAddNote = async (noteData) => {
+    try {
+      // Make an API call to create a new note on the server
+      const response = await fetch('http://localhost:3000/api/notes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-auth-token': token, // Include the actual token in the request headers
+        },
+        body: JSON.stringify(noteData), // Pass the note data to the API request
+      });
+
+      // Log the request details for debugging
+    console.log('Request Headers:', response.headers);
+    console.log('Request Body:', noteData);
+
+      // Check if the note creation was successful
+      if (response.ok) {
+        const newNote = await response.json();
+        // Handle the new note data (e.g., update the state to include the new note)
+        setNotes([...notes, newNote]);
+      } else {
+        const errorData = await response.json();
+        console.error('Note creation error:', errorData.error);
+        // Handle the note creation error (e.g., show an error message)
+      }
+    } catch (error) {
+      console.error('An error occurred during note creation:', error);
+      // Handle any other note creation errors (e.g., network error)
+    }
   };
 
   const handleRegister = async (userData) => {
@@ -54,9 +90,17 @@ const App = () => {
 
       // Check if the login was successful
       if (response.ok) {
+        // On successful login, get the token from the response
+        const data = await response.json();
+        const { token } = data;
+
         // On successful login, set the authenticated state to true
         // to show the NotesApp
         setAuthenticated(true);
+        setToken(token);
+
+        // You can also log the token in the console to verify
+        console.log('Token:', token);
       } else {
         const errorData = await response.json();
         console.error('Login error:', errorData.error);
@@ -68,16 +112,24 @@ const App = () => {
     }
   };
 
-    const [notes, setNotes] = useState([]);
-
-  // Fetch the notes data using useEffect and set it to the 'notes' state
   useEffect(() => {
     const fetchNotes = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/notes');
-  
+        // Skip the fetch request if token is empty
+        if (!token) {
+          return;
+        }
+        const response = await fetch('http://localhost:3000/api/notes', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-auth-token': token, // Include the actual token in the request headers
+          },
+        });
+
         if (response.ok) {
           const notesData = await response.json();
+          console.log('Notes Data:', notesData);
           setNotes(notesData);
         } else {
           console.error('Failed to fetch notes:', response.status);
@@ -93,19 +145,19 @@ const App = () => {
     if (authenticated) {
       fetchNotes();
     }
-  }, [authenticated]);
+  }, [authenticated, token]);
 
   return (
     <div>
       {!authenticated ? (
         <AuthForm
           onLoginSuccess={handleLoginSuccess}
-          onRegister={handleRegister} // Pass the handleRegister function as a prop
-          onLogin={handleLogin} // Pass the handleLogin function as a prop
+          onRegister={handleRegister}
+          onLogin={handleLogin}
         />
       ) : (
         <NotesApp>
-          <NoteForm />
+          <NoteForm onAddNote={handleAddNote} />
           <NoteList notes={notes} />
           {/* <RichTextEditor /> */}
         </NotesApp>

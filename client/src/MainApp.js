@@ -79,7 +79,7 @@ const MainApp = () => {
 
       if (response.ok) {
         // Generate a unique ID for the new note (you can use a library like 'uuid' for this)
-        newNote.id = Math.random().toString(36).substr(2, 9);
+        newNote._id = Math.random().toString(36).substr(2, 9);
         // Add the new note to the existing notes array
         setNotes([...notes, newNote]);
       } else {

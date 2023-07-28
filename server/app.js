@@ -7,9 +7,9 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const User = require('./server/models/User');
-const Note = require('./server/models/Note');
-const authMiddleware = require('./server/middleware/authMiddleware');
+const User = require('./models/User');
+const Note = require('./models/Note');
+const authMiddleware = require('./middleware/authMiddleware');
 require('dotenv').config();
 const crypto = require('crypto');
 
@@ -69,7 +69,8 @@ app.post('/api/register', async (req, res) => {
       const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
       // res.json({ token });
       res.cookie('token', token, { httpOnly: true });
-      res.json({ message: 'Login successful' });
+      res.json({ message: 'Login successful',
+    token: token });
     } catch (error) {
         console.error(error);
       res.status(500).json({ error: 'Login failed' });
@@ -81,13 +82,11 @@ app.use(authMiddleware);
 
 // Create a new note
 app.post('/api/notes', async (req, res) => {
-  const { title, content, category, tags } = req.body;
+  const { title, content } = req.body;
   try {
     const newNote = new Note({
       title,
       content,
-      category,
-      tags,
       userId: req.user.userId,
     });
     await newNote.save();

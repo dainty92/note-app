@@ -19,7 +19,7 @@ const NotesList = ({ notes }) => {
         onChange={(e) => setSearchTerm(e.target.value)}
       />
       {filteredNotes.map((note) => (
-        <NoteCard key={note.id} title={note.title} content={note.content} />
+        <NoteCard key={note._id} title={note.title} content={note.content} />
       ))}
     </div>
   );
