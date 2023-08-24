@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 
 const WebSocketConnection = ({ onDataUpdate }) => {
   useEffect(() => {
-    const socket = io('http://localhost:3000');
+    const socket = io('https://note-app-fcnj.onrender.com');
 
     // Listen for data updates from the server
     socket.on('dataUpdate', (updatedData) => {

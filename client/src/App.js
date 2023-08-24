@@ -21,7 +21,7 @@ const App = () => {
   const handleAddNote = async (noteData) => {
     try {
       // Make an API call to create a new note on the server
-      const response = await fetch('http://localhost:3000/api/notes', {
+      const response = await fetch('https://note-app-fcnj.onrender.com/api/notes', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -53,7 +53,7 @@ const App = () => {
   const handleRegister = async (userData) => {
     try {
       // Make an API call to register the user
-      const response = await fetch('http://localhost:3000/api/register', {
+      const response = await fetch('https://note-app-fcnj.onrender.com/api/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ const App = () => {
   const handleLogin = async (userData) => {
     try {
       // Make an API call to log in the user
-      const response = await fetch('http://localhost:3000/api/login', {
+      const response = await fetch('https://note-app-fcnj.onrender.com/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -119,7 +119,7 @@ const App = () => {
         if (!token) {
           return;
         }
-        const response = await fetch('http://localhost:3000/api/notes', {
+        const response = await fetch('https://note-app-fcnj.onrender.com/api/notes', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
