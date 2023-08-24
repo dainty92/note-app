@@ -3,14 +3,9 @@
   "name": "Esther's Notes App",
   "icons": [
     {
-      "src": "Group 1 (4).png", 
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "Group 2 (3).png", 
-      "sizes": "512x512",
-      "type": "image/png"
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
     }
   ],
   "start_url": "/index.html",
