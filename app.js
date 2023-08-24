@@ -90,9 +90,12 @@ app.post('/api/notes', async (req, res) => {
       userId: req.user.userId,
     });
     await newNote.save();
+    // Log a success message to the console
+    console.log('Note saved successfully:', newNote);
+
     res.status(201).json(newNote);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to create note' });
+    res.status(500).json({ error: 'Failed to create note', detail: error.message });
   }
 });
 
